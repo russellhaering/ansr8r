@@ -10,13 +10,26 @@ from twisted.python import log
 import twitter
 import settings
 
-def onLogin(user, feed):
-    feed.follow(onFollowEvent, user.id).addErrback(log.err)
+class TwitterBot:
+    def __init__(self):
+        print "Initializing..."
+        self.feed = twitter.TwitterFeed(settings.USERNAME, settings.PASSWORD)
+        print "Logged In"
+        self.feed.show_user(settings.USERNAME).addCallback(self.onLogin).addErrback(lambda fail: fail.printTraceback())
 
-def onFollowEvent(entry):
-    print entry.text
+    def onLogin(self, user):
+        self.id = user.id
+        self.feed.follow(self.onFollowEvent, user.id).addErrback(log.err)
 
-feed = twitter.TwitterFeed(settings.USERNAME, settings.PASSWORD)
-feed.show_user(settings.USERNAME).addCallback(onLogin, feed)
+    def onFollowEvent(self, entry):
+        #print entry.text
+        if entry.user.screen_name == settings.USERNAME:
+            return
+        else:
+            reply = entry.text.replace('@' + settings.USERNAME, 'RT @' + entry.user.screen_name, 1)
+            self.feed.update(reply).addErrback(lambda fail: fail.printTraceback())
 
-reactor.run()
+
+if __name__ == "__main__":
+    bot = TwitterBot()
+    reactor.run()
