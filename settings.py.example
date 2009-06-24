@@ -1,5 +1,9 @@
-
-
 # Twitter Account Settings
 USERNAME = 'my_twitter_username'
 PASSWORD = 'my_twitter_password'
+
+# Bot Settings
+BOTNAME = 'AnswerBot'   # Must be only one word, no space
+BRAINFILE = 'bot.brn'
+SESSNFILE = 'bot.ses'
+STATUSFILE = 'bot.status'

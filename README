@@ -8,3 +8,16 @@ Installation:
     3. Run 'git module init', then 'git module update' to get the latest version of my twitty-twister fork
     4. Copy settings.py.example to settings.py and update the information in the file
     5. Run the bot with 'python bot.py'
+
+Credits:
+    This code is based on the following projects
+
+    1. PyAIML - http://pyaiml.sourceforge.net/
+    2. Howie Bot - http://howie.sourceforge.net/
+    3. Twitty Twister - http://github.com/dustin/twitty-twister/
+    4. Twisted - http://twistedmatrix.com/
+
+See It in Action:
+    http://twitter.com/ansr8r
+
+    Just say something on Twitter to @ansr8r, and you should receive a response
