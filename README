@@ -5,7 +5,7 @@ Requirements:
 Installation:
     1. Clone this source code
     2. Make sure you have Twisted Web
-    3. Run 'git module init', then 'git module update' to get the latest version of my twitty-twister fork
+    3. Run 'git submodule init', then 'git submodule update' to get the latest version of my twitty-twister fork
     4. Copy settings.py.example to settings.py and update the information in the file
     5. Run the bot with 'python bot.py'
 
