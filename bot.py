@@ -62,7 +62,7 @@ class TwitterBot:
             statusFile = open(settings.STATUSFILE, 'r')
             self.status = cPickle.load(statusFile)
 
-    def onFollowStreamClose(self):
+    def onFollowStreamClose(self, result):
         """Called when the follow stream connection is lost, reopens the
             connection recursively"""
         self.feed.follow(self.onMention, user.id).addCallback(self.onFollowStreamClose).addErrback(log.err)
