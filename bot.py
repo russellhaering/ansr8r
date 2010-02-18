@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import sys, os, glob, cPickle
 
-sys.path.append(os.path.join(sys.path[0], 'twitty-twister', 'lib'))
-
 from twisted.internet import reactor, protocol, defer, task
 from twisted.python import log
 
@@ -65,7 +63,7 @@ class TwitterBot:
     def onFollowStreamClose(self, result):
         """Called when the follow stream connection is lost, reopens the
             connection recursively"""
-        self.feed.follow(self.onMention, user.id).addCallback(self.onFollowStreamClose).addErrback(log.err)
+        self.feed.follow(self.onMention, self.id).addCallback(self.onFollowStreamClose).addErrback(log.err)
 
     def onLogin(self, user):
         self.id = user.id
@@ -87,8 +85,3 @@ class TwitterBot:
             print "Responding to", entry.id, ":", input, "with:", reply
             self.feed.update(reply, in_reply_to=entry.id).addErrback(lambda fail: fail.printTraceback())
             self.status['lastMentionRepliedTo'] = entry.id
-
-
-if __name__ == "__main__":
-    bot = TwitterBot()
-    reactor.run()

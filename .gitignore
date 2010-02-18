@@ -3,3 +3,5 @@ settings.py
 *.brn
 *.ses
 *.status
+twistd.log
+twistd.pid
